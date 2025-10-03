@@ -1,54 +1,52 @@
 ## (1）PERT/CPM圖
 ```mermaid
 graph LR
-    A[1. 研擬計畫 1d] --- B(2. 任務分配 4d)
-    A --> C[3. 取得硬體 17d]
-    B --- D(4. 程式開發 70d)
-    C --> E[5. 安裝硬體 10d]
-    D --- F(6. 程式測試 30d)
-    E --> G[7. 撰寫使用手冊 25d]
-    E --> H[8. 轉換檔案 20d]
-    F --- I(9. 系統測試 25d)
-    G --> J[10. 使用者訓練 20d]
-    H --> J
-    I --- K(11. 使用者測試 25d)
-    J --> K
+    A[1. 研拟計畫 1d] === B(2. 任務分配 4d)
+    A --> C[3. 取得硬體 17d]
+    B === D(4. 程式開發 70d)
+    C --> E[5. 安裝硬體 10d]
+    D === F(6. 程式測試 30d)
+    E --> G[7. 撰寫使用手冊 25d]
+    E --> H[8. 轉換檔案 20d]
+    F === I(9. 系統測試 25d)
+    G --> J[10. 使用者訓練 20d]
+    H --> J
+    I === K(11. 使用者測試 25d)
+    J --> K
 
-    %% 關鍵路徑的連線樣式
-    linkStyle 0 stroke:red,stroke-width:3px
-    linkStyle 2 stroke:red,stroke-width:3px
-    linkStyle 4 stroke:red,stroke-width:3px
-    linkStyle 6 stroke:red,stroke-width:3px
-    linkStyle 8 stroke:red,stroke-width:3px
-    linkStyle 10 stroke:red,stroke-width:3px
+    %% 关键路径连线样式：使用红色加粗 (linkStyle)
+    linkStyle 0 stroke:red,stroke-width:3px
+    linkStyle 2 stroke:red,stroke-width:3px
+    linkStyle 4 stroke:red,stroke-width:3px
+    linkStyle 6 stroke:red,stroke-width:3px
+    linkStyle 8 stroke:red,stroke-width:3px
 
-    %% 關鍵路徑的節點樣式
-    style A fill:#ffcccc,stroke:#ff0000,stroke-width:2px
-    style B fill:#ffcccc,stroke:#ff0000,stroke-width:2px
-    style D fill:#ffcccc,stroke:#ff0000,stroke-width:2px
-    style F fill:#ffcccc,stroke:#ff0000,stroke-width:2px
-    style I fill:#ffcccc,stroke:#ff0000,stroke-width:2px
-    style K fill:#ffcccc,stroke:#ff0000,stroke-width:2px
+    %% 关键路径节点样式：使用浅红填充 (style)
+    style A fill:#ffcccc,stroke:#ff0000,stroke-width:2px
+    style B fill:#ffcccc,stroke:#ff0000,stroke-width:2px
+    style D fill:#ffcccc,stroke:#ff0000,stroke-width:2px
+    style F fill:#ffcccc,stroke:#ff0000,stroke-width:2px
+    style I fill:#ffcccc,stroke:#ff0000,stroke-width:2px
+    style K fill:#ffcccc,stroke:#ff0000,stroke-width:2px
 ```
 ---
 ## (2) 甘特圖
 ```mermaid
 gantt
-    title 專案甘特圖 (以日數計算，總工期 155 天)
-    dateFormat  x
-    axisFormat  %s
-
-    section 關鍵路徑
-    1. 研擬計畫      :crit, id1, 0, 1d
-    2. 任務分配      :crit, id2, 1, 4d
-    4. 程式開發      :crit, id4, 5, 70d
-    6. 程式測試      :crit, id6, 75, 30d
-    9. 系統測試      :crit, id9, 105, 25d
-    11. 使用者測試  :crit, id11, 130, 25d
-
-    section 其他任務
-    3. 取得硬體      :id3, 1, 17d
-    5. 安裝硬體      :id5, 18, 10d
-    7. 撰寫使用手冊 :id7, 28, 25d
-    8. 轉換檔案      :id8, 28, 20d
-    10. 使用者訓練  :id10, 53, 20d
+    title 專案甘特圖
+    dateFormat  YYYY-MM-DD
+    section 計畫
+    研擬計畫          :a1, 2025-09-01, 1d
+    任務分配          :a2, after a1, 4d
+    section 硬體
+    取得硬體          :a3, after a1, 17d
+    安裝硬體          :a5, after a3, 10d
+    撰寫使用手冊      :a7, after a5, 25d
+    轉換檔案          :a8, after a5, 20d
+    section 軟體
+    程式開發          :a4, after a2, 70d
+    程式測試          :a6, after a4, 30d
+    系統測試          :a9, after a6, 25d
+    section 使用者
+    使用者訓練        :a10, after a7 a8, 20d
+    使用者測試        :a11, after a9 a10, 25d
